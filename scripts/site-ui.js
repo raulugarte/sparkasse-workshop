@@ -45,7 +45,9 @@ export function resolveFragmentImages(container, baseUrl) {
     const attr = el.hasAttribute('src') ? 'src' : 'srcset';
     const value = el.getAttribute(attr);
     if (!value || /^(https?:|data:|\/)/.test(value)) return;
-    el.setAttribute(attr, new URL(value, baseUrl).pathname);
+    // keep the query string: EDS uses it for the optimized image renditions
+    const url = new URL(value, baseUrl);
+    el.setAttribute(attr, `${url.pathname}${url.search}`);
   });
 }
 

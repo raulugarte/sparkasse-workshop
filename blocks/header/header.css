@@ -87,7 +87,9 @@ header nav .nav-brand {
   display: none;
 }
 
-header nav .nav-brand p {
+header nav .nav-brand p,
+header nav .nav-brand picture {
+  display: block;
   line-height: 0;
 }
 

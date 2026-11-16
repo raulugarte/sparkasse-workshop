@@ -33,6 +33,11 @@
   color: #4b4b4b;
 }
 
+.left-navigation li > p {
+  margin: 0;
+  color: inherit;
+}
+
 .left-navigation a:any-link {
   display: block;
   width: 100%;

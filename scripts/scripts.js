@@ -10,7 +10,14 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  decorateBlock,
+  loadBlock,
+  getMetadata,
 } from './aem.js';
+import { initTheme } from './site-ui.js';
+
+// apply the saved / preferred colour theme before the first paint
+initTheme();
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -74,6 +81,54 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Adds the site table of contents (left-navigation block) as a sidebar column of main.
+ * The column exists from the first paint so loading its content later causes no layout shift.
+ * @param {Element} main The container element
+ */
+function buildLeftNavigation(main) {
+  if (main.querySelector(':scope > .left-navigation-wrapper')) return;
+  const aside = document.createElement('aside');
+  const block = buildBlock('left-navigation', '');
+  aside.append(block);
+  main.prepend(aside);
+  decorateBlock(block);
+}
+
+/**
+ * Adds the "next chapter" button at the end of the first section (the block resolves the
+ * next page from the left navigation and removes itself on the last page).
+ * Authors can switch it off with page metadata `Next Button: false`.
+ * @param {Element} main The container element
+ */
+function buildNextButton(main) {
+  if (main.querySelector('.next-button')) return;
+  if ((getMetadata('next-button') || '').toLowerCase() === 'false') return;
+  const firstSection = main.querySelector(':scope > div');
+  if (firstSection) firstSection.append(buildBlock('next-button', ''));
+}
+
+/**
+ * Adds the "On this page" table of contents as a fixed right rail on pages with
+ * at least two h2–h4 headings. Built eagerly so the content column has its final width at
+ * first paint; the block itself loads lazily.
+ * @param {Element} main The container element
+ */
+function buildOnThisPage(main) {
+  if (main.querySelector('.right-rail')) return;
+  const headings = main.querySelectorAll(':scope > div h2, :scope > div h3, :scope > div h4');
+  if (headings.length < 2) return;
+  const aside = document.createElement('aside');
+  const block = buildBlock('on-this-page', '');
+  aside.append(block);
+  const firstSection = main.querySelector(':scope > div');
+  if (firstSection) firstSection.after(aside);
+  else main.append(aside);
+  decorateBlock(block);
+  aside.classList.add('right-rail');
+  document.body.classList.add('has-right-rail');
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -97,6 +152,9 @@ function buildAutoBlocks(main) {
       });
     }
     buildWidgetAutoBlocks(main);
+    buildLeftNavigation(main);
+    buildNextButton(main);
+    buildOnThisPage(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -187,7 +245,11 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('body > header'));
 
   const main = doc.querySelector('main');
+  const leftNavigation = main.querySelector(':scope > .left-navigation-wrapper > .left-navigation');
+  if (leftNavigation) loadBlock(leftNavigation);
   await loadSections(main);
+  const onThisPage = main.querySelector(':scope > .right-rail > .on-this-page');
+  if (onThisPage) loadBlock(onThisPage);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
@@ -196,6 +258,7 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('body > footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  import('./image-lightbox.js').then(({ default: initImageLightbox }) => initImageLightbox());
   loadFonts();
 }
 

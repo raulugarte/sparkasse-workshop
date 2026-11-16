@@ -1,20 +1,37 @@
+/* footer — values measured on the source site */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  box-sizing: border-box;
+  padding: 32px;
+  border-top: 1px solid var(--footer-border-color, #d3d3d3);
+  background: var(--footer-background, #f8f8f8);
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
 }
 
-footer .footer > div {
-  margin: auto;
+footer .footer {
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  margin: auto;
 }
 
 footer .footer p {
   margin: 0;
+  color: var(--body-text-color);
+  text-align: center;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
+footer .footer a:any-link {
+  color: var(--footer-link-color, var(--body-text-color));
+  text-decoration: underline;
+}
+
+footer .footer a:hover,
+footer .footer a:focus-visible {
+  color: var(--footer-link-hover-color, var(--link-hover-color));
+}
+
+:root[data-theme="dark"] footer {
+  --footer-background: #242424;
+  --footer-border-color: #444;
+  --footer-link-hover-color: #fff;
 }

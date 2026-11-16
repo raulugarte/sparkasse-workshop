@@ -1,0 +1,33 @@
+/* next-chapter button — values measured on the source site */
+.next-button .next-button-link:any-link {
+  box-sizing: border-box;
+  display: inline-block;
+  height: auto;
+  border: 2px solid #2680eb;
+  border-radius: 20px;
+  padding: 10px 30px;
+  background-color: #2680eb;
+  color: #fff;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.38;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.next-button .next-button-link:hover,
+.next-button .next-button-link:focus-visible {
+  background-color: transparent;
+  color: #2680eb;
+  text-decoration: none;
+}
+
+.next-button .next-button-link:focus-visible {
+  outline: 2px solid #2680eb;
+  outline-offset: 2px;
+}

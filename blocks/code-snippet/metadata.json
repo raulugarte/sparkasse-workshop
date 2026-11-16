@@ -1,0 +1,11 @@
+{
+  "variantName": "code-snippet",
+  "baseBlock": "code",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Light Prism-style code panel (#f5f2f0, 4px radius, 16px padding, Consolas-stack 16px/24px) with lightweight token coloring and a black \"Copy\" button top-right; single-line samples render as an inline code chip without a button.",
+  "contentPattern": "One row, one cell containing <pre><code> with the code (GraphQL/JavaScript) verbatim. Whitespace is preserved exactly; token coloring is done by a small in-block tokenizer that never alters the text.",
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Code samples (GraphQL queries, JavaScript) placed inline between tutorial steps.",
+  "reuseGuidance": "Reuse for any preformatted code sample. Author the code as a code block so whitespace is preserved; the Copy button copies the exact code text."
+}

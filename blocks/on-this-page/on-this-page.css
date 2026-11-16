@@ -1,0 +1,76 @@
+/* "On this page" table of contents — values measured on the source site.
+   The fixed rail itself (.right-rail) is laid out in styles/styles.css. */
+.on-this-page {
+  font-family: var(--body-font-family);
+}
+
+.on-this-page .on-this-page-nav {
+  max-height: calc(100vh - (var(--nav-height) + 40px));
+  overflow: auto;
+  padding: 50px 0;
+}
+
+.on-this-page .on-this-page-title {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.on-this-page ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.on-this-page li {
+  margin: 0;
+}
+
+.on-this-page a:any-link {
+  display: block;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.on-this-page a:hover {
+  text-decoration: none;
+}
+
+.on-this-page a:focus-visible {
+  outline: 2px solid var(--link-hover-color);
+  outline-offset: -2px;
+}
+
+.on-this-page ul ul a:any-link {
+  padding-left: 20px;
+  color: var(--body-text-color);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+.on-this-page ul ul ul a:any-link {
+  padding-left: 28px;
+}
+
+.on-this-page a.active {
+  border: 1px solid var(--on-this-page-active-border, #e5e7eb);
+  background-color: var(--on-this-page-active-background, #f3f4f6);
+  color: var(--text-color);
+  font-weight: 600;
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .on-this-page {
+  --on-this-page-active-border: #444;
+  --on-this-page-active-background: rgb(255 255 255 / 8%);
+}

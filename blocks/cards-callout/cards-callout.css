@@ -1,0 +1,75 @@
+/*
+ * Cards Callout -- values from source computed styles
+ * (main--headless-lab--adobe-demopoc.aem.live: div.note, div.tip, div.note-note).
+ * No option: plain body text, no box (source div.note-note is unstyled).
+ * note / tip: bordered box, 14px / 1.5em text, icon + bold label header.
+ */
+.cards-callout > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards-callout .cards-callout-card {
+  margin: 0;
+  padding: 0;
+}
+
+.cards-callout .cards-callout-card p {
+  margin: 10px 0;
+}
+
+.cards-callout .cards-callout-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* note / tip box */
+.cards-callout.note .cards-callout-card,
+.cards-callout.tip .cards-callout-card {
+  margin: 1em 0;
+  padding: 10px;
+  border: 1px solid #a8d4eb;
+  background-color: var(--callout-note-background);
+  color: #323232;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.cards-callout.tip .cards-callout-card {
+  background-color: var(--callout-tip-background);
+}
+
+/* header: icon + bold label, laid out inline like the source paragraph */
+.cards-callout .cards-callout-header {
+  margin: 10px 0;
+}
+
+.cards-callout .cards-callout-header .cards-callout-label {
+  display: inline;
+  margin: 0;
+}
+
+.cards-callout .cards-callout-icon {
+  position: relative;
+  top: 6px;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px 17px 0;
+}
+
+.cards-callout .cards-callout-icon img {
+  width: 100%;
+  height: 100%;
+  vertical-align: baseline;
+}
+
+/* dark theme (source: html[data-theme="dark"] .note / .tip) */
+:root[data-theme="dark"] .cards-callout.note .cards-callout-card,
+:root[data-theme="dark"] .cards-callout.tip .cards-callout-card {
+  color: #fff;
+}
+
+:root[data-theme="dark"] .cards-callout .cards-callout-card p {
+  color: #fff;
+}

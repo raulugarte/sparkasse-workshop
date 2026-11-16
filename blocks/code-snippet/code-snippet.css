@@ -1,0 +1,126 @@
+/* Block: code-snippet -- values from source computed styles (Prism light theme as rendered on source) */
+.code-snippet {
+  position: relative;
+  color: #000;
+}
+
+/* Panel: overrides the global light `pre` rule inside the block only */
+.code-snippet pre {
+  margin: 8px 0;
+  padding: 16px;
+  overflow: auto;
+  border-radius: 4px;
+  background: #f5f2f0;
+  color: #000;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  tab-size: 4;
+  hyphens: none;
+}
+
+.code-snippet pre code {
+  padding: 2px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: inherit;
+}
+
+.code-snippet pre::selection,
+.code-snippet pre ::selection {
+  background: #b3d4fc;
+}
+
+/* Copy button */
+.code-snippet .code-snippet-copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14.4px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.code-snippet .code-snippet-copy:hover {
+  background-color: #000;
+}
+
+.code-snippet .code-snippet-copy:active {
+  background-color: #4c4e50;
+}
+
+/* Single-line sample: inline code chip, as rendered on source */
+.code-snippet .code-snippet-line {
+  margin: 10px 0;
+  line-height: 25.6px;
+}
+
+.code-snippet .code-snippet-line code {
+  padding: 1.6px;
+  border-radius: 4.8px;
+  background: #f5f2f0;
+  color: var(--body-text-color);
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: normal;
+  tab-size: 4;
+}
+
+/* Token colors (source: Prism default theme via the code block stylesheet) */
+.code-snippet .token.comment {
+  color: #708090;
+}
+
+.code-snippet .token.punctuation {
+  color: #999;
+}
+
+.code-snippet .token.property {
+  color: #905;
+}
+
+.code-snippet .token.selector {
+  color: #690;
+}
+
+.code-snippet .token.string,
+.code-snippet .token.url {
+  background: rgb(255 255 255 / 50%);
+  color: #9a6e3a;
+}
+
+.code-snippet .token.atrule {
+  color: #07a;
+}
+
+.code-snippet .token.function {
+  color: #dd4a68;
+}
+
+.code-snippet .token.important {
+  color: #e90;
+  font-weight: bold;
+}
+
+/* dark theme: dark panel (source --code-bg) with light text so the code stays readable */
+:root[data-theme="dark"] .code-snippet,
+:root[data-theme="dark"] .code-snippet pre {
+  background: var(--code-background);
+  color: var(--code-color);
+}

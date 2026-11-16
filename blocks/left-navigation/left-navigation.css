@@ -1,0 +1,113 @@
+/* left navigation (site table of contents) — values measured on the source site.
+   The aside column itself is laid out in styles/styles.css so it exists before this loads. */
+.left-navigation {
+  box-sizing: border-box;
+  position: sticky;
+  top: 140px;
+  height: 86vh;
+  margin-left: 30px;
+  padding-right: 40px;
+  overflow: hidden auto;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.left-navigation h2 {
+  margin: 16px 0 8px;
+  color: var(--heading-color);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.left-navigation ul {
+  margin: 16px 0 16px 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.left-navigation li {
+  margin: 0;
+  padding: 5px 10px;
+  color: #4b4b4b;
+}
+
+.left-navigation a:any-link {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--left-nav-text-color, var(--body-text-color));
+  text-decoration: none;
+}
+
+.left-navigation a:hover {
+  background-color: var(--left-nav-hover-background, #e8e8e8);
+  color: var(--left-nav-text-color, var(--body-text-color));
+  text-decoration: none;
+}
+
+.left-navigation a.active {
+  background-color: var(--left-nav-active-background, #e0eefc);
+  color: var(--left-nav-active-color, #2166ae);
+}
+
+/* collapsible groups */
+.left-navigation li.left-navigation-group {
+  margin: 16px 0 15px;
+  padding: 0;
+}
+
+.left-navigation-group-toggle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: calc(100% + 20px);
+  min-height: 42px;
+  margin: 0 0 0 -2px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px 5px 0;
+  background: none;
+  color: var(--left-nav-text-color, #4b4b4b);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.left-navigation-group-toggle:hover {
+  background-color: var(--left-nav-hover-background, #e8e8e8);
+}
+
+.left-navigation-group-toggle .icon {
+  flex: none;
+  position: relative;
+  left: -23px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.left-navigation-group-toggle[aria-expanded="true"] .icon {
+  transform: rotate(90deg);
+}
+
+.left-navigation-group-toggle + ul {
+  display: none;
+  margin: 16px 0 16px 20px;
+}
+
+.left-navigation-group-toggle[aria-expanded="true"] + ul {
+  display: block;
+}
+
+.left-navigation a:focus-visible,
+.left-navigation-group-toggle:focus-visible {
+  outline: 2px solid var(--link-hover-color);
+  outline-offset: -2px;
+}
+
+:root[data-theme="dark"] .left-navigation-group-toggle .icon img {
+  filter: invert(1);
+}

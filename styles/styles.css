@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -10,64 +12,14 @@
  * governing permissions and limitations under the License.
  */
 
-:root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+/* design tokens live in brand.css */
 
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
-
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
-
-  /* nav height */
-  --nav-height: 64px;
-}
-
-/* fallback fonts */
+/* fallback font (metrics from the source site) */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: adobe-clean-fallback;
+  size-adjust: 100.06%;
+  ascent-override: 95%;
   src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
-  :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
 }
 
 body {
@@ -104,12 +56,13 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
-  scroll-margin: 40px;
+  color: var(--heading-color);
+  scroll-margin: calc(var(--nav-height) + 1em);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -129,14 +82,32 @@ blockquote {
   margin-bottom: 0.25em;
 }
 
+p,
+li {
+  color: var(--body-text-color);
+  font-weight: 400;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
 code,
-pre {
+pre,
+samp {
+  font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
 }
 
+code,
+samp {
+  padding: 0.125em;
+}
+
 pre {
-  padding: 16px;
-  border-radius: 8px;
+  padding: 1em;
+  border-radius: 0.25em;
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
@@ -156,11 +127,12 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
   overflow-wrap: break-word;
 }
 
-a:hover {
+a:hover,
+a:focus-visible {
   color: var(--link-hover-color);
   text-decoration: underline;
 }
@@ -278,6 +250,32 @@ button.button.accent:disabled:focus-visible {
   color: var(--dark-color);
 }
 
+/* EDS button reset: the source site has no styled content buttons, links stay links */
+main .button-container,
+main p.button-wrapper {
+  display: inline;
+  margin: 0;
+}
+
+main a.button:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--link-color);
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  white-space: normal;
+}
+
+main a.button:hover,
+main a.button:focus-visible {
+  background: none;
+  color: var(--link-hover-color);
+}
+
 main img {
   max-width: 100%;
   width: auto;
@@ -295,24 +293,48 @@ main img {
   width: 100%;
 }
 
+/* tutorial screenshots: the source shows most of them at 90% of the text column */
+main .default-content-wrapper picture img {
+  width: 90%;
+}
+
+@media (width < 900px) {
+  main .default-content-wrapper picture img {
+    width: 100%;
+  }
+}
+
+/* page title (source "title" block: 32px, semi-bold, heading color, 1.6 line height,
+   followed by a 20px spacer, hence the larger bottom margin) */
+main .default-content-wrapper h1 {
+  margin: 10px 0 60px;
+  line-height: 1.6;
+}
+
+/* screenshots sit in their own wrapper on the source: ~30px above and below */
+main .default-content-wrapper p:has(> picture) {
+  margin: 30px 0;
+}
+
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: var(--section-padding) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
-  padding: 0 24px;
+  padding: 10px 16px 10px 8px;
 }
 
-main > .section:first-of-type {
-  margin-top: 0;
+main > .section .default-content-wrapper p {
+  margin: 10px 0;
 }
 
-@media (width >= 900px) {
+@media (width >= 600px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 10px 32px;
   }
 }
 
@@ -322,4 +344,130 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* site layout: left navigation column (source: 400px grey sidebar, content column 65vw) */
+main > .left-navigation-wrapper {
+  display: none;
+}
+
+/* small screens: the sidebar is a drawer opened by the header hamburger (no backdrop) */
+body.left-nav-open main > .left-navigation-wrapper {
+  display: block;
+  position: fixed;
+  inset: var(--header-height) auto 0 0;
+  z-index: 998;
+  box-sizing: border-box;
+  width: min(351px, 100vw);
+  padding-top: 48px;
+  overflow-y: auto;
+  background: var(--background-color);
+  border-right: 1px solid var(--left-nav-border-color);
+}
+
+body.left-nav-open main > .left-navigation-wrapper .left-navigation {
+  position: static;
+  height: auto;
+  padding-right: 0;
+}
+
+body.left-nav-open main > .left-navigation-wrapper .left-navigation > nav {
+  max-width: 250px;
+}
+
+@media (width >= 900px) {
+  main:has(> .left-navigation-wrapper) {
+    position: relative;
+    padding-left: var(--left-nav-width);
+  }
+
+  main > .left-navigation-wrapper {
+    display: block;
+    position: absolute;
+    inset: 0 auto 0 0;
+    box-sizing: border-box;
+    width: var(--left-nav-width);
+    padding-top: 76px;
+    background: var(--left-nav-background);
+    border-right: 1px solid var(--left-nav-border-color);
+  }
+
+  main:has(> .left-navigation-wrapper) > .section {
+    box-sizing: border-box;
+    min-height: 80vh;
+    max-width: calc(65vw + 64px);
+    padding: 64px 32px;
+  }
+
+  main:has(> .left-navigation-wrapper) > .section > div {
+    max-width: none;
+    margin: 0;
+    padding: 10px 0;
+  }
+}
+
+/* dark theme (source: html[data-theme="dark"]) */
+:root[data-theme="dark"] {
+  --background-color: #1a1a1a;
+  --text-color: #fff;
+  --body-text-color: #fff;
+  --heading-color: #fff;
+  --link-color: #fff;
+  --link-hover-color: #99c2ff;
+  --light-color: #333;
+  --dark-color: #444;
+  --header-background: #242424;
+  --header-text-color: #e0e0e0;
+  --left-nav-text-color: #e0e0e0;
+  --left-nav-background: #1a1a1a;
+  --left-nav-border-color: #444;
+  --left-nav-hover-background: #333;
+  --left-nav-active-background: #1a365d;
+  --left-nav-active-color: #66a3ff;
+  --callout-note-background: #264653;
+  --callout-tip-background: #4a3325;
+  --code-background: #2d2d2d;
+  --code-color: #ccc;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] header .nav-wrapper {
+  border-bottom: 1px solid #444;
+}
+
+/* "On this page" right rail (source: fixed, top 140px, right 16px, 320px + 16px inset) */
+main > .right-rail {
+  display: none;
+}
+
+@media (width >= 900px) {
+  main > .right-rail {
+    display: block;
+    position: fixed;
+    top: 140px;
+    right: 16px;
+    z-index: 3;
+    width: 320px;
+    padding-left: 16px;
+    border-left: 1px solid var(--right-rail-border-color, #e5e7eb);
+  }
+
+  body.has-right-rail {
+    --left-nav-width: 351px;
+  }
+
+  body.has-right-rail main > .section {
+    margin-right: 320px;
+  }
+}
+
+@media (width >= 1200px) {
+  body.has-right-rail main > .section {
+    margin-right: 360px;
+  }
+}
+
+:root[data-theme="dark"] main > .right-rail {
+  --right-rail-border-color: #444;
 }

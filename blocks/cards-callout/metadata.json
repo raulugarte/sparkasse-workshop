@@ -1,0 +1,14 @@
+{
+  "variantName": "cards-callout",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Light-blue (#d9edf7) callout box inline within tutorial text. Optional header line: icon (note / bulb) followed by bold label (NOTE / Quick Tip), then body text. The variant without option is body text only.",
+  "contentPattern": "One row per callout (normally one), one cell: optional first paragraph with :note:/:bulb: icon + bold label, then body paragraph(s). A header-only row followed by a body row is merged into one callout.",
+  "options": [
+    { "class": "note", "label": "Note" },
+    { "class": "tip", "label": "Tip" }
+  ],
+  "memberVariantIds": [],
+  "usage": "Inline notes and tips within tutorial steps. Use (note) for a NOTE callout with the :note: icon, (tip) for a Quick Tip with the :bulb: icon, or no option for a plain body-only callout.",
+  "reuseGuidance": "Reuse for any short highlighted aside in running text. Not for card grids (use cards) or code samples (use code-snippet)."
+}

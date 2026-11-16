@@ -1,0 +1,52 @@
+/*
+ * Brand tokens migrated from https://main--headless-lab--adobe-demopoc.aem.live/
+ * (values taken from the source :root custom properties and computed styles).
+ */
+
+:root {
+  /* colors */
+  --background-color: #fff;
+  --light-color: #eee;
+  --dark-color: #ccc;
+  --text-color: #000;
+  --body-text-color: #4b5563;
+  --heading-color: #2e3d52;
+  --link-color: #4b5563;
+  --link-hover-color: #136ff6;
+  --callout-note-background: #d9edf7;
+  --callout-note-border: #a8d4eb;
+  --callout-tip-background: #ffeddf;
+  --code-background: #f5f2f0;
+  --code-color: #000;
+
+  /* fonts */
+  --body-font-family: adobe-clean, adobe-clean-fallback, arial, helvetica, sans-serif;
+  --heading-font-family: var(--body-font-family);
+  --fixed-font-family: adobe-clean, "Adobe Clean", menlo, consolas, "Liberation Mono", monospace;
+
+  /* body sizes */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+
+  /* heading sizes */
+  --heading-font-size-xxl: 32px;
+  --heading-font-size-xl: 24px;
+  --heading-font-size-l: 18.72px;
+  --heading-font-size-m: 16px;
+  --heading-font-size-s: 13.28px;
+  --heading-font-size-xs: 10.72px;
+
+  /* spacing */
+  --section-padding: 64px;
+  --content-max-width: 936px;
+
+  /* nav height: the header element reserves 64px, the fixed bar is 92px tall */
+  --nav-height: 64px;
+  --header-height: 92px;
+
+  /* left navigation */
+  --left-nav-width: clamp(351px, calc(35vw - 63px), 401px);
+  --left-nav-background: #f8f8f8;
+  --left-nav-border-color: #d3d3d3;
+}

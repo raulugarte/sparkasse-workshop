@@ -1,0 +1,24 @@
+/* image block — widths as on the source site (block option width-NNpercent) */
+main .image {
+  width: 100%;
+}
+
+main .image picture,
+main .image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  main .image.width-10percent { width: 10%; }
+  main .image.width-20percent { width: 20%; }
+  main .image.width-30percent { width: 30%; }
+  main .image.width-40percent { width: 40%; }
+  main .image.width-50percent { width: 50%; }
+  main .image.width-60percent { width: 60%; }
+  main .image.width-70percent { width: 70%; }
+  main .image.width-80percent { width: 80%; }
+  main .image.width-90percent { width: 90%; }
+  main .image.width-100percent { width: 100%; }
+}

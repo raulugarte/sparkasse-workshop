@@ -86,24 +86,6 @@ export function initTheme() {
   document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
 }
 
-let leftNavRequest;
-
-/**
- * Fetches the left navigation fragment once per page view: /content first (local preview),
- * then the site root (DA/EDS). Shared by the left navigation and the next-chapter button.
- * @returns {Promise<string|null>}
- */
-export function fetchLeftNavHtml() {
-  if (!leftNavRequest) {
-    leftNavRequest = (async () => {
-      let resp = await fetch('/content/left-nav.plain.html');
-      if (!resp.ok) resp = await fetch('/left-nav.plain.html');
-      return resp.ok ? resp.text() : null;
-    })();
-  }
-  return leftNavRequest;
-}
-
 /**
  * Normalizes a page path for comparisons (the local preview serves pages under /content).
  * @param {string} path pathname
@@ -115,4 +97,46 @@ export function normalizePagePath(path) {
     .replace(/\.(plain\.)?html$/, '')
     .replace(/\/index$/, '/')
     .replace(/(.)\/$/, '$1');
+}
+
+/**
+ * Folders that hold a tutorial of their own, with their own nav, left-nav and footer documents
+ * (e.g. /assets/nav). Pages outside these folders use the documents at the site root.
+ */
+const SITE_FOLDERS = ['/assets'];
+
+/**
+ * @returns {string} the folder of the current page's tutorial ('' for the site root)
+ */
+export function getSiteFolder() {
+  const path = normalizePagePath(window.location.pathname);
+  return SITE_FOLDERS.find((folder) => path === folder || path.startsWith(`${folder}/`)) || '';
+}
+
+/**
+ * Fetches a fragment document (nav, left-nav, footer) of the current page's tutorial:
+ * /content first (local preview), then the site itself (DA/EDS). Metadata-independent.
+ * @param {string} name fragment name, e.g. 'nav'
+ * @returns {Promise<{html: string, url: string}|null>}
+ */
+export async function fetchSiteFragment(name) {
+  const folder = getSiteFolder();
+  let resp = await fetch(`/content${folder}/${name}.plain.html`);
+  if (!resp.ok) resp = await fetch(`${folder}/${name}.plain.html`);
+  if (!resp.ok) return null;
+  return { html: await resp.text(), url: resp.url };
+}
+
+let leftNavRequest;
+
+/**
+ * Fetches the left navigation fragment once per page view.
+ * Shared by the left navigation and the next-chapter button.
+ * @returns {Promise<string|null>}
+ */
+export function fetchLeftNavHtml() {
+  if (!leftNavRequest) {
+    leftNavRequest = fetchSiteFragment('left-nav').then((fragment) => (fragment ? fragment.html : null));
+  }
+  return leftNavRequest;
 }

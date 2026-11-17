@@ -1,12 +1,13 @@
+import { fetchSiteFragment } from '../../scripts/site-ui.js';
+
 /**
- * Fetches the footer fragment: /content first (local preview), then the site root (DA/EDS).
+ * Fetches the footer fragment of the current page's tutorial folder (e.g. /assets/footer for
+ * pages under /assets/, /footer otherwise): /content first (local preview), then the site.
  * @returns {Promise<string|null>}
  */
 async function fetchFooter() {
-  // metadata-independent: /content first (localhost), then root (DA/EDS prod)
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
-  return resp.ok ? resp.text() : null;
+  const fragment = await fetchSiteFragment('footer');
+  return fragment ? fragment.html : null;
 }
 
 /**

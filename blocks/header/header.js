@@ -1,6 +1,6 @@
 import { decorateIcons } from '../../scripts/aem.js';
 import {
-  convertIconNotation, resolveFragmentImages, getTheme, setTheme,
+  convertIconNotation, resolveFragmentImages, getTheme, setTheme, fetchSiteFragment,
 } from '../../scripts/site-ui.js';
 
 // media query match that indicates mobile/tablet width
@@ -10,15 +10,12 @@ const isDesktop = window.matchMedia('(width >= 900px)');
 const SECTION_NAMES = ['brand', 'title', 'tools'];
 
 /**
- * Fetches the nav fragment: /content first (local preview), then the site root (DA/EDS).
+ * Fetches the nav fragment of the current page's tutorial folder (e.g. /assets/nav for pages
+ * under /assets/, /nav otherwise): /content first (local preview), then the site (DA/EDS).
  * @returns {Promise<{html: string, url: string}|null>}
  */
-async function fetchNav() {
-  // metadata-independent: /content first (localhost), then root (DA/EDS prod)
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
-  if (!resp.ok) return null;
-  return { html: await resp.text(), url: resp.url };
+function fetchNav() {
+  return fetchSiteFragment('nav');
 }
 
 /**

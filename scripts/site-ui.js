@@ -103,7 +103,10 @@ export function normalizePagePath(path) {
  * Folders that hold a tutorial of their own, with their own nav, left-nav and footer documents
  * (e.g. /assets/nav). Pages outside these folders use the documents at the site root.
  */
-const SITE_FOLDERS = ['/assets'];
+
+/* const SITE_FOLDERS = ['/assets']; */
+const SITE_FOLDERS = ['/assets', '/sites', '/cf'];
+
 
 /**
  * @returns {string} the folder of the current page's tutorial ('' for the site root)
